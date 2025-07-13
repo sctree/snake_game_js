@@ -91,3 +91,51 @@ function gameLoop() {
 
     drawGame();
 }
+
+function drawGame() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    snake.forEach((segment, index) => {
+        if (index === 0) {
+            ctx.fillStyle = 'red';
+        } else {
+            ctx.fillstyle = 'green';
+        }
+        ctx.fillRect(segment.x, segment.y, gridSize, gridSize);
+    });
+
+    ctx.fillStyle = 'yellow';
+    ctx.beginPath(), ctx.arc(food.x + gridSize / 2, food.y + gridSize / 2, gridSize / 2, 0, Math.PI * 2), ctx.fill();
+
+    // draw score
+    ctx.fillStyle = 'white';
+    ctx.font = '20px Arial';
+    ctx.fillText('Score: ' + score, 10, 30);
+
+    // gameover message, if applicable
+    if (isGameOver) {
+        ctx.fillStyle = 'white';
+        ctx.font = '30px Arial';
+        ctx.fillText('Game Over', canvas.width / 2 - 85, canvas.height / 2);
+        ctx.font = '20px Arial';
+        ctx.fillText('Score: ' + score, canvas.width / 2 - 40, canvas.height / 2 + 30);
+        ctx.fillText('Click to Restart', canvas.width / 2 - 75, canvas.height / 2 + 60);
+    } else if (!gameStarted) {
+        ctx.fillStyle = 'white';
+        ctx.font = '30px Arial';
+        ctx.fillText('Click to Start', canvas.width / 2 - 85, canvas.height / 2);
+    }
+}
+
+// event listener
+window.addEventListener('keydown', changeDirection);
+
+canvas.addEventListener('click', () => {
+    if (isGameOver) {
+        startGame();
+    } else if (!gameStarted) {
+        startGame();
+    }
+});
+
+drawGame();
