@@ -43,3 +43,51 @@ function changeDirection(event) {
         direction = { x: gridSize, y: 0 };
     }
 }
+
+function detectCollision() {
+    const head = snake[0];
+
+    if (head.x < 0 || head.x >= canvas.width || head.y < 0 || head.y >= canvas.height) {
+        return true;
+    }
+
+    for (let i = 1; i < snake.length; i++) {
+        if (head.x === snake[i].x && head.y === snake[i].y) {
+            return true;
+        }
+    }
+
+    return false;
+}
+
+function eatFood() {
+    const head = snake[0];
+    if (head.x === food.x && head.y === food.y) {
+        score += 10;
+        snake.push[{}];
+
+        food = {
+            x: Math.floor(Math.random() * (canvas.width / gridSize)) * gridSize,
+            y: Math.floor(Math.random() * (canvas.height / gridSize)) * gridSize
+        };
+    }
+}
+
+function gameLoop() {
+    if (detectCollision()) {
+        endGame();
+        return;
+    }
+
+    // move snake
+    const head = { x: snake[0].x + direction.x, y: snake[0].y + direction.y };
+    snake.unshift(head); // add to head end of snake
+
+    eatFood();
+
+    if (!isGameOver) {
+        snake.pop();
+    }
+
+    drawGame();
+}
