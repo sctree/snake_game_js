@@ -29,3 +29,17 @@ function endGame() {
     isGameOver = true;
     drawGame();
 }
+
+function changeDirection(event) {
+    if (isGameOver) return;
+
+    if (event.key === 'ArrowUp' && direction.y === 0) {
+        direction = { x: 0, y: -gridSize };
+    } else if (event.key === 'ArrowDown' && direction.y === 0) {
+        direction = { x: 0, y: gridSize };
+    } else if (event.key === 'ArrowLeft' && direction.x === 0) {
+        direction = { x: -gridSize, y: 0 };
+    } else if (event.key === 'ArrowRight' && direction.x === 0) {
+        direction = { x: gridSize, y: 0 };
+    }
+}
