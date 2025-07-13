@@ -17,7 +17,7 @@ function startGame() {
     direction = { x: gridSize, y: 0 };
     score = 0;
     isGameOver = false;
-    gameStarted = false;
+    gameStarted = true;
     clearInterval(gameInterval);
     gameInterval = setInterval(gameLoop, 100);
 
@@ -64,7 +64,8 @@ function eatFood() {
     const head = snake[0];
     if (head.x === food.x && head.y === food.y) {
         score += 10;
-        snake.push[{}];
+        snake.push({})
+
 
         food = {
             x: Math.floor(Math.random() * (canvas.width / gridSize)) * gridSize,
