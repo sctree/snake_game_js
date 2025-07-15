@@ -95,15 +95,16 @@ function gameLoop() {
 
 function drawGame() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-    snake.forEach((segment, index) => {
+    let index = -1
+    for (let segment of snake) {
+        index++
         if (index === 0) {
             ctx.fillStyle = 'red';
         } else {
             ctx.fillstyle = 'green';
         }
         ctx.fillRect(segment.x, segment.y, gridSize, gridSize);
-    });
+    }
 
     ctx.fillStyle = 'yellow';
     ctx.beginPath(), ctx.arc(food.x + gridSize / 2, food.y + gridSize / 2, gridSize / 2, 0, Math.PI * 2), ctx.fill();
